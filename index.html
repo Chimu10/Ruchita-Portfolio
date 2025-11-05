@@ -3,198 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruchita Patel | Portfolio</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='10' fill='%230a192f'></rect><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='50' font-family='Space Mono, monospace' fill='%2364ffda'>RP</text></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Ruchita Patel - Aspiring UX Designer</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>RP</text></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        html {
+            scroll-behavior: smooth; /* Enables smooth scrolling */
+        }
         body {
-            font-family: 'Space Mono', monospace;
-            background-color: #0a192f; /* Dark Navy Fallback */
-            color: #ccd6f6; /* Light Slate */
-            background-image: linear-gradient(rgba(10, 25, 47, 0.85), rgba(10, 25, 47, 0.85)), url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Off-white background */
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
         }
-        .font-mono {
-            font-family: 'Space Mono', monospace;
+        /* Custom gradient text from inspiration */
+        .gradient-text {
+            background: linear-gradient(to right, #4F46E5, #D946EF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
         }
-        .text-neon {
-            color: #64ffda; /* Neon Green/Cyan */
+        .btn-primary {
+            background-color: #4F46E5; /* Primary accent */
+            color: white;
+            transition: background-color 0.3s ease;
         }
-        .futuristic-card {
-            background-color: rgba(10, 25, 47, 0.85); /* Slightly lighter navy */
-            border: 1px solid #1f3657;
-            backdrop-filter: blur(10px);
+        .btn-primary:hover {
+            background-color: #4338CA;
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #333;
+            border: 1px solid #e0e0e0; /* Soft gray divider */
             transition: all 0.3s ease;
         }
-        .futuristic-card:hover {
+        .btn-secondary:hover {
+            background-color: #f8f9fa;
+            border-color: #ccc;
+        }
+        .nav-link {
+            color: #555;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #4F46E5; /* Active link color */
+        }
+        /* Add scroll-margin-top to sections to offset sticky header */
+        section[id] {
+            scroll-margin-top: 5rem; /* Adjust as needed */
+        }
+        .project-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+            display: block; /* Make it an anchor block */
+        }
+        .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(100, 255, 218, 0.1);
-            border-color: #64ffda;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: #4F46E5;
         }
-        .btn-neon {
-            border: 1px solid #64ffda;
-            color: #64ffda;
-            transition: all 0.3s ease;
-        }
-        .btn-neon:hover {
-            background-color: rgba(100, 255, 218, 0.1);
-        }
-        .section-title::before {
-            content: '0' counter(section) '.';
-            counter-increment: section;
-            margin-right: 0.5rem;
-            color: #64ffda;
-            font-size: 1.25rem;
-        }
-        body {
-           counter-reset: section;
+        .skill-tag {
+            background-color: #eef2ff; /* Light indigo */
+            color: #4338CA;
+            border: 1px solid #c7d2fe;
         }
         .form-input {
-            background-color: transparent;
-            border: 1px solid #1f3657;
-            color: #ccd6f6;
-            transition: border-color 0.3s ease;
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
         }
         .form-input:focus {
             outline: none;
-            border-color: #64ffda;
-            box-shadow: 0 0 10px rgba(100, 255, 218, 0.1);
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 2px #c7d2fe;
+        }
+        /* Simple active state for project filters */
+        .filter-btn.active {
+            background-color: #4F46E5;
+            color: white;
+        }
+        .filter-btn {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover {
+            border-color: #4F46E5;
+        }
+        
+        /* Animation classes */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Initials Avatar Style */
+        .initials-avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eef2ff; /* Light indigo background */
+            border: 1px solid #c7d2fe;
+            aspect-ratio: 1 / 1; /* Make it a perfect square */
+        }
+        .initials-avatar span {
+            font-size: 8rem; /* Large text */
+            font-weight: 700;
+            line-height: 1;
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="antialiased">
 
     <!-- Header -->
-    <header class="max-w-7xl mx-auto py-6 flex justify-between items-center">
-        <div class="text-2xl font-bold text-neon cursor-pointer hover:animate-pulse">
-            &lt;RP /&gt;
-        </div>
-        <nav class="hidden md:flex items-center space-x-8 text-lg">
-            <a href="#about" class="hover:text-neon transition-colors">/about</a>
-            <a href="#projects" class="hover:text-neon transition-colors">/work</a>
-            <a href="#contact" class="btn-neon py-2 px-4 rounded-md text-base">/contact</a>
+    <header class="sticky top-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
+        <nav class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold nav-link">Ruchita Patel.</a>
+            <div class="flex items-center space-x-6">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
         </nav>
     </header>
 
-    <main class="max-w-5xl mx-auto mt-16 md:mt-32">
-        <!-- Hero Section -->
-        <section id="hero" class="mb-32">
-            <p class="text-neon text-lg mb-4">Initializing transmission...</p>
-            <h1 class="text-5xl md:text-7xl font-bold text-gray-100">Ruchita Patel.</h1>
-            <h2 class="text-4xl md:text-6xl font-bold text-gray-400 mt-2">I build things for the web.</h2>
-            <p class="mt-8 text-xl max-w-2xl">
-                I'm a software developer specializing in creating immersive, user-centric digital experiences. Currently focused on exploring the future of front-end technology.
-            </p>
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-16 md:py-24">
+
+        <!-- Home Section -->
+        <section id="home">
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight">
+                    Designing Digital Experiences with <span class="gradient-text">Clarity</span> and <span class="gradient-text">Emotion.</span>
+                </h1>
+                <p class="mt-8 text-lg text-gray-600">
+                    I'm Ruchita, an Aspiring UX Designer focused on creating intuitive, beautiful, and human-centered digital solutions that resonate with people.
+                </p>
+                <div class="mt-12 flex justify-center space-x-4">
+                    <a href="#projects" class="btn-primary py-3 px-6 rounded-lg font-semibold">View My Work</a>
+                    <a href="#contact" class="btn-secondary py-3 px-6 rounded-lg font-semibold">Get In Touch</a>
+                </div>
+            </div>
         </section>
 
-        <!-- About Me Section -->
-        <section id="about" class="py-20">
-            <h3 class="text-3xl font-bold text-gray-100 section-title mb-8 flex items-center">
-                About Me
-                <span class="flex-grow h-px bg-gray-700 ml-4"></span>
-            </h3>
-            <p class="text-lg leading-relaxed">
-                Hello! I'm a passionate developer who loves bringing code to life. My mission is to architect and design immersive digital experiences, from initial concept to final deployment. With a strong foundation in both web development and user experience (UX) design, I specialize in turning complex problems into elegant, intuitive, and user-centric solutions on the web. I am also keenly exploring the world of Artificial Intelligence, actively learning how to integrate intelligent features into modern web applications.
-            </p>
+        <!-- About Section -->
+        <section id="about" class="pt-24 md:pt-32 fade-in-section">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                
+                <!-- About Me Text -->
+                <div>
+                    <h1 class="text-5xl font-bold tracking-tight mb-8">About Me</h1>
+                    <div class="space-y-6 text-lg text-gray-600">
+                        <p>Hi, I’m Ruchita — a UX designer who loves creating simple and meaningful digital experiences. My design journey began with curiosity about why some products feel easy to use while others don’t.</p>
+                        <p>I believe good design starts with empathy and understanding users’ real needs. I recently designed Savor – A Smart Pantry App, where I worked on the full design process using Figma, from research to high-fidelity prototypes.</p>
+                        <p>I also maintain my own website, CodeCapital.blog, where I explore tech and design topics. I’m always learning new tools and ideas to make designs more intuitive and enjoyable.</p>
+                    </div>
+                </div>
+                
+                <!-- Profile Image / Avatar -->
+                <div>
+                    <!-- 
+                        PHOTO INSTRUCTIONS:
+                        Your photo is now linked. Make sure to upload "ruchitapatel.jpg" to Netlify.
+                    -->
+
+                    <img src="ruchitapatel.jpg" alt="Ruchita Patel" class="rounded-lg shadow-lg w-full aspect-square object-cover">
+                    
+                    <!-- Initials Avatar Placeholder (Commented Out) -->
+                    <!--
+                    <div>
+                        <div class="initials-avatar rounded-lg shadow-lg w-full">
+                            <span class="gradient-text">RP</span>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+            
+            <!-- Skills & Tools -->
+            <div class="mt-24 fade-in-section">
+                <h2 class="text-3xl font-bold tracking-tight text-center mb-12">Skills & Tools</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="skill-tag py-2 px-5 rounded-full font-medium">Figma</span>
+                    <span class="skill-tag py-2 px-5 rounded-full font-medium">UX Research</span>
+                    <span class="skill-tag py-2 px-5 rounded-full font-medium">Prototyping</span>
+                    <span class="skill-tag py-2 px-5 rounded-full font-medium">Wireframing</span>
+                    <span class="skill-tag py-2 px-5 rounded-full font-medium">User Personas</span>
+                    <span class="skill-tag py-2 px-5 rounded-full font-medium">Empathy Mapping</span>
+                    <span class="skill-tag py-2 px-5 rounded-full font-medium">HTML/CSS</span>
+                    <span class="skill-tag py-2 px-5 rounded-full font-medium">JavaScript</span>
+                </div>
+            </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-20">
-            <h3 class="text-3xl font-bold text-gray-100 section-title mb-8 flex items-center">
-                Things I've Built
-                 <span class="flex-grow h-px bg-gray-700 ml-4"></span>
-            </h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Project 1: CodeCapital Blog -->
-                <div class="futuristic-card rounded-md p-6 flex flex-col">
-                     <div class="flex justify-between items-center">
-                        <h4 class="text-2xl font-bold text-gray-100">CodeCapital Blog</h4>
-                         <a href="https://codecapital.blog" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-neon transition-colors">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        </a>
+        <section id="projects" class="pt-24 md:pt-32 fade-in-section">
+            <h1 class="text-5xl font-bold tracking-tight text-center mb-6">Projects</h1>
+            <p class="text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12">
+                Here's a selection of my work. Feel free to browse and explore the case studies for each.
+            </p>
+            
+            <!-- Project Filters -->
+            <div class="flex justify-center space-x-3 mb-12">
+                <button class="filter-btn active py-2 px-5 rounded-lg font-medium" data-filter="all">All</button>
+                <button class="filter-btn py-2 px-5 rounded-lg font-medium" data-filter="ux">UX</button>
+                <button class="filter-btn py-2 px-5 rounded-lg font-medium" data-filter="web">Web</button>
+            </div>
+            
+            <!-- Project Grid -->
+            <div id="project-grid" class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Project 1: Smart Pantry -->
+                <a href="https://www.behance.net/gallery/237880759/Savor-UXUI-Case-Study-for-a-Smart-Pantry-App" target="_blank" rel="noopener noreferrer" class="project-card rounded-lg overflow-hidden" data-category="ux">
+                    <!-- Image Dimensions: The container is h-60 (240px). 
+                         Upload "FlashPage.png" to Netlify.
+                    -->
+                    <img src="FlashPage.png" alt="Smart Pantry Project" class="w-full h-60 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Smart Pantry</h3>
+                        <p class="text-gray-600 mb-4">An end-to-end UX case study for a mobile-first pantry management app.</p>
+                        <span class="text-indigo-600 font-medium">View Case Study &rarr;</span>
                     </div>
-                    <p class="mt-4 flex-grow">A dynamic blog platform built from the ground up, featuring a clean front-end and a secure Firebase-powered backend for content management.</p>
-                    <div class="mt-4 flex space-x-4 text-sm text-neon">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>Firebase</span>
-                        <span>Netlify</span>
+                </a>
+                
+                <!-- Project 2: CodeCapital Blog -->
+                <a href="codecapital-blog.html" class="project-card rounded-lg overflow-hidden" data-category="web">
+                    <img src="https://placehold.co/800x600/e0f2fe/0891b2?text=CodeCapital+Blog" alt="CodeCapital Blog Project" class="w-full h-60 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">CodeCapital Blog</h3>
+                        <p class="text-gray-600 mb-4">A dynamic blog built with HTML, CSS, JavaScript, and Firebase.</p>
+                        <span class="text-indigo-600 font-medium">View Project &rarr;</span>
                     </div>
-                </div>
-                <!-- Project 2: Smart Pantry UX Case Study -->
-                 <div class="futuristic-card rounded-md p-6 flex flex-col">
-                     <div class="flex justify-between items-center">
-                        <h4 class="text-2xl font-bold text-gray-100">Smart Pantry UX Case Study</h4>
-                         <a href="https://www.canva.com/design/DAG1qyVGXPg/C0nDZzbAIALxqc7vMOw6lQ/view?utm_content=DAG1qyVGXPg&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hdbd8fc27ab" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-neon transition-colors">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        </a>
-                    </div>
-                    <p class="mt-4 flex-grow">A comprehensive UX case study for a smart kitchen app, covering the entire design process from user research to high-fidelity prototypes.</p>
-                    <div class="mt-4 flex space-x-4 text-sm text-neon">
-                        <span>User Research</span>
-                        <span>UX Design</span>
-                        <span>Wireframing</span>
-                    </div>
-                </div>
+                </a>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20">
-            <h3 class="text-3xl font-bold text-gray-100 section-title mb-4">What's Next?</h3>
-            <h4 class="text-5xl font-bold text-gray-200 mb-12">Get In Touch</h4>
-
-            <div class="grid md:grid-cols-2 gap-12 items-start">
-                <!-- Left Column: Info -->
-                <div class="space-y-8">
-                    <p>
-                        My inbox is always open. Whether you have a question, a project idea, or just want to say hi, I'll get back to you!
-                    </p>
-                    <div class="flex items-center space-x-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        <a href="mailto:ruchitapatel1007@gmail.com" class="hover:text-neon">ruchitapatel1007@gmail.com</a>
+        <section id="contact" class="pt-24 md:pt-32 fade-in-section">
+            <div class="text-center max-w-2xl mx-auto">
+                <h1 class="text-5xl font-bold tracking-tight mb-6">Get In Touch</h1>
+                <p class="text-lg text-gray-600 mb-12">
+                    Have a project in mind or just want to say hi? Feel free to send me a message.
+                </p>
+            </div>
+            
+            <!-- Netlify Contact Form -->
+            <form name="contact" method="POST" data-netlify="true" action="/thank-you.html" class="max-w-2xl mx-auto">
+                <input type="hidden" name="form-name" value="contact">
+                <div class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                        <input type="text" id="name" name="name" required class="form-input w-full p-3 rounded-lg">
                     </div>
-                     <div class="flex items-center space-x-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                        <span>+91 9527853909</span>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" id="email" name="email" required class="form-input w-full p-3 rounded-lg">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" required class="form-input w-full p-3 rounded-lg"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary py-3 px-10 rounded-lg font-semibold">Send Message</button>
                     </div>
                 </div>
-
-                <!-- Right Column: Form -->
-                <form name="contact" method="POST" data-netlify="true" class="space-y-6">
-                    <div>
-                        <label for="name" class="block mb-2 text-sm text-gray-400">Name</label>
-                        <input type="text" id="name" name="name" required class="form-input w-full p-3 rounded-md">
-                    </div>
-                     <div>
-                        <label for="email" class="block mb-2 text-sm text-gray-400">Email</label>
-                        <input type="email" id="email" name="email" required class="form-input w-full p-3 rounded-md">
-                    </div>
-                     <div>
-                        <label for="message" class="block mb-2 text-sm text-gray-400">Message</label>
-                        <textarea id="message" name="message" rows="4" required class="form-input w-full p-3 rounded-md"></textarea>
-                    </div>
-                    <button type="submit" class="btn-neon text-lg py-3 px-8 rounded-md w-full">Send Transmission</button>
-                </form>
-            </div>
+            </form>
         </section>
-        
+
     </main>
-    
+
     <!-- Footer -->
-    <footer class="text-center py-8 text-gray-500">
-        <div class="flex justify-center space-x-6 mb-4">
-            <a href="https://github.com/Chimu10" target="_blank" rel="noopener noreferrer" class="hover:text-neon">GitHub</a>
-            <a href="#" class="hover:text-neon">LinkedIn</a>
-            <a href="#" class="hover:text-neon">Twitter</a>
+    <footer class="max-w-6xl mx-auto px-6 py-12 border-t border-gray-200 mt-24">
+        <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <p class="text-gray-500 mb-4 md:mb-0">&copy; 2025 Ruchita Patel. All rights reserved.</p>
+            <div class="flex space-x-6">
+                <!-- Add your LinkedIn URL here -->
+                <a href="#" class="text-gray-500 hover:text-indigo-600">LinkedIn</a>
+                <a href="https://github.com/Chimu10" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-indigo-600">GitHub</a>
+                <a href="mailto:ruchitapatel1007@gmail.com" class="text-gray-500 hover:text-indigo-600">Email</a>
+            </div>
         </div>
-        <p>Designed & Built by Ruchita Patel</p>
     </footer>
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Project Filtering Logic ---
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const filter = e.currentTarget.dataset.filter;
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+
+                    // Filter grid
+                    const allCards = document.querySelectorAll('#project-grid .project-card');
+                    allCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // --- Active Nav Link on Scroll ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+            const header = document.querySelector('header');
+            const headerHeight = header ? header.offsetHeight : 80; // Fallback height
+
+            // Calculate rootMargin values explicitly to prevent potential template literal parsing issues
+            const topMargin = -headerHeight;
+            const bottomMargin = -(window.innerHeight - headerHeight - 100);
+            const rootMarginString = `${topMargin}px 0px ${bottomMargin}px 0px`;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${entry.target.id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { 
+                rootMargin: rootMarginString
+                // This complex rootMargin tries to select the section that is at the top of the viewport, just below the header
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Fade-in on Scroll Animation ---
+            const animatedSections = document.querySelectorAll('.fade-in-section');
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            animatedSections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
